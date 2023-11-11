@@ -14,9 +14,8 @@
                     $money = $_POST["money"];
                     $sql = "INSERT INTO testing (name, money)  VALUES ('$name',$money)";
                     
-                    print_r($sql);
                     if(mysqli_query($conn, $sql)){
-                        echo "aung p";
+                        header("location: index.php");
                     }
 
                 }
