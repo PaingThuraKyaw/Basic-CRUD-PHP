@@ -7,22 +7,29 @@ require_once "./template/header.php";
 
 <div class=" container" >
     <div class=" row">
-        <div class="  mt-5 col-12">
-            <div class=" d-flex mb-3 align-items-center justify-content-between">
-                <h3>List</h3>
-                <div class=" d-flex align-items-center ">
-                    <input type="text" class=" form-control">
-                    <button class=" btn btn-primary">Search</button>
-                </div>
-            </div>
-            <?php
+    <?php
+
+    print_r($_SESSION);
             
             $sql="Select * from testing";
             $total = "Select sum(money) As total from testing";
+            if(!empty($_GET["q"])){
+                $q = $_GET["q"];
+                $sql .= " WHERE name LIKE '%$q%'";
+            }
             $query = mysqli_query($conn, $sql);
             $totalQuery = mysqli_query($conn, $total);
             
             ?>
+        <div class="  mt-5 col-12">
+            <div class=" d-flex mb-3 align-items-center justify-content-between">
+                <h3>List</h3>
+                <form method="get" class=" d-flex align-items-center ">
+                    <input type="text" name="q" class=" form-control">
+                    <button class=" btn btn-primary">Search</button>
+                </form>
+            </div>
+           
 
             <table class=" table-bordered table">
                 <thead>
